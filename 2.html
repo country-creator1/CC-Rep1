@@ -1,0 +1,51 @@
+<html>
+<head>
+<style>
+    form{
+        width:300px;
+        text-align:center;
+        background-color: dodgerblue;
+        padding: 20px 20px 20px 20px;
+        border-radius:10px;
+        margin:0 auto;
+    }
+</style>
+</head>
+<body>
+<form id="snack-drink">
+<p>Select a snack:</p>
+<br>
+<select id="snack" onchange="snackSelection()">
+    <option value="none">None</option>
+    <option value="cookies">Cookies</option>
+    <option value="chips">Chips</option>
+    <option value="cupcakes">Cupcakes</option>
+    <option value="popcorn">Popcorn</option>
+    <option value="other">Other</option>
+</select>
+<br>
+<p>Select a drink:</p>
+<br>
+<select id="drink" onchange="drinkSelection()">
+    <option value="none">None</option>
+    <option value="water">Water</option>
+    <option value="orange juice"> Orange Juice</option>
+    <option value="Coke">Coke</option>
+    <option value="Pepsi">Pepsi</option>
+    <option value="other">Other</option>
+</select>
+</form>
+<p id="snack-select">You have selected <strong>none</strong></p>
+<p id="drink-select">You have selected <strong>none</strong></p>
+</body>
+<script>
+function snackSelection() {
+const selectedSnack=document.getElementById("snack").value
+document.getElementById("snack-select").innerHTML="You have selected "+ "<strong>"+selectedSnack+"</strong>"
+}
+function drinkSelection() {
+const selectedDrink=document.getElementById("drink").value
+document.getElementById("drink-select").innerHTML="You have selected "+"<strong>"+selectedDrink+"</strong>"
+}
+</script>
+</html>
