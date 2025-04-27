@@ -15,37 +15,53 @@
 <form id="snack-drink">
 <p>Select a snack:</p>
 <br>
-<select id="snack" onchange="snackSelection()">
-    <option value="none">None</option>
-    <option value="biscuits">Biscuits £1</option>
-    <option value="crisps">Crisps £1.20</option>
-    <option value="cupcakes">Cupcakes £1.50</option>
-    <option value="popcorn">Popcorn £1.20</option>
-    <option value="other">Other</option>
+<select id="snack" onchange="priceUpdate(); showTotal()" >
+    <option value="none" data-price="0.00">None</option>
+    <option value="biscuits" data-price="1.00">Biscuits £1</option>
+    <option value="crisps" data-price="1.20">Crisps £1.20</option>
+    <option value="cupcakes" data-price="1.50">Cupcakes £1.50</option>
+    <option value="popcorn" data-price="1.50">Popcorn £1.20</option>
+    <option value="other" data-price="1.00">Other £1</option>
 </select>
 <br>
 <p>Select a drink:</p>
 <br>
-<select id="drink" onchange="drinkSelection()">
-    <option value="none">None</option>
-    <option value="water">Water 50p</option>
-    <option value="orange juice"> Orange Juice £1</option>
-    <option value="Coke">Coke £1</option>
-    <option value="Pepsi">Pepsi £1</option>
-    <option value="other">Other</option>
+<select id="drink" onchange="priceUpdateDrink(); showTotal()">
+    <option value="none" data-price="0.00">None</option>
+    <option value="water" data-price="0.50">Water 50p</option>
+    <option value="orange juice" data-price="1.00"> Orange Juice £1</option>
+    <option value="Coke" data-price="1.00">Coke £1</option>
+    <option value="Pepsi" data-price="1.00">Pepsi £1</option>
+    <option value="other" data-price="1.00">Other £1</option>
 </select>
 </form>
-<p id="snack-select">You have selected <strong>none</strong></p>
-<p id="drink-select">You have selected <strong>none</strong></p>
+<p id = "priceDisplay">Snack Price £0.00</p>
+<p id = "priceDisplayDrink">Drink Price £0.00</p>
+<p id = "total-price">Total Price £0.00</p>
 </body>
 <script>
-function snackSelection() {
-const selectedSnack=document.getElementById("snack").value
-document.getElementById("snack-select").innerHTML="You have selected "+ "<strong>"+selectedSnack+"</strong>"
+function priceUpdate() {
+const dropdown = document.querySelector('#snack');
+const selectedOption = dropdown.options[dropdown.selectedIndex];
+const price = selectedOption.getAttribute("data-price");
+const numericPrice = parseFloat(price); 
+const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
+document.getElementById("priceDisplay").innerHTML="Snack Price £: "+"<strong>" +formattedPrice+"</strong>"
+return numericPrice
 }
-function drinkSelection() {
-const selectedDrink=document.getElementById("drink").value
-document.getElementById("drink-select").innerHTML="You have selected "+"<strong>"+selectedDrink+"</strong>"
+function priceUpdateDrink() {
+const dropdown = document.querySelector('#drink');
+const selectedOption = dropdown.options[dropdown.selectedIndex];
+const price = selectedOption.getAttribute("data-price");
+const numericPrice = parseFloat(price); 
+const formattedPrice = numericPrice.toFixed(2); // This will round and format to two decimal places
+document.getElementById("priceDisplayDrink").innerHTML="Snack Price £: "+"<strong>" +formattedPrice+"</strong>"
+return numericPrice
 }
+function showTotal(){
+
+let total = priceUpdateDrink() + priceUpdate()
+
+document.getElementById("total-price").innerHTML = "Total Price £:"+" <strong>" + total+ "</strong>"}
 </script>
 </html>
